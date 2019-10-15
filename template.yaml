@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Automatic database shut down and start up Lambda functions
+Parameters:
+  InstanceID:
+    Type: String
+    Default: testdb
+  InstanceARN:
+    Type: String
+    Default: arn:aws:rds:eu-west-1:964213726654:db:testdb
+Globals:
+  Function:
+    MemorySize: 128
+    Timeout: 3
+    Handler: app.lambdaHandler
+    Runtime: nodejs10.x
+    Environment:
+      Variables:
+        INSTANCE_IDENTIFIER: !Ref InstanceID
+Resources:
+  DBShutDownFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: shut-down/
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - rds:StopDBInstance
+              Resource: !Ref InstanceARN
+      Events:
+        Schedule1:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 17 ? * MON-FRI *)
+      DeadLetterQueue:
+        Type: SNS
+        TargetArn: !Ref DBFunctionsDeadLetterTopic
+  DBStartUpFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: start-up/
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - rds:StartDBInstance
+              Resource: !Ref InstanceARN
+      Events:
+        Schedule1:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 5 ? * MON-FRI *)
+      DeadLetterQueue:
+        Type: SNS
+        TargetArn: !Ref DBFunctionsDeadLetterTopic
+  DBFunctionsDeadLetterTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: <YOUR EMAIL ADRES>
+          Protocol: email
