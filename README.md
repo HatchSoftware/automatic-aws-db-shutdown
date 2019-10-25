@@ -29,3 +29,9 @@ Deploy
 ```bash
 sam deploy --template-file outputTemplate.yaml --stack-name <CloudFormation stack to create/update> --capabilities CAPABILITY_IAM
 ``` 
+
+#### Automated
+
+Automated deployment with CodePipeline (setup explained in [this blog post](https://medium.com/hatchsoftware/setting-up-ci-cd-for-lambda-functions-using-aws-codepipeline-880567769dde)).
+
+`Commit and push using GIT`

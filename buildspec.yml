@@ -1,0 +1,13 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - aws cloudformation package --template-file template.yaml --s3-bucket <S3 artifacts bucket> --output-template-file outputTemplate.yaml
+
+artifacts:
+  type: zip
+  files:
+    - template.yaml
+    - outputTemplate.yaml
