@@ -21,13 +21,13 @@ sam local invoke <Function to invoke>
 Package
 
 ```bash
-sam package --template-file template.yaml --s3-bucket <S3 artifacts bucket> --output-template-file outputTemplate.yaml
+sam package --template-file template.yaml --s3-bucket brooklyn-archive-qa1 --output-template-file outputTemplate.yaml
 ```
 
 Deploy
 
 ```bash
-sam deploy --template-file outputTemplate.yaml --stack-name <CloudFormation stack to create/update> --capabilities CAPABILITY_IAM
+sam deploy --template-file outputTemplate.yaml --stack-name auto-db-shutdown-stack --capabilities CAPABILITY_IAM
 ``` 
 
 #### Automated
