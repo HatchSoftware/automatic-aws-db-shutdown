@@ -4,16 +4,16 @@ Description: Automatic database shut down and start up Lambda functions
 Parameters:
   InstanceID:
     Type: String
-    Default: testdb
+    Default: qa1-rds-provisioned
   InstanceARN:
     Type: String
-    Default: arn:aws:rds:eu-west-1:964213726654:db:testdb
+    Default: arn:aws:rds:eu-west-2:341150754668:cluster:qa1-rds-provisioned
 Globals:
   Function:
     MemorySize: 128
     Timeout: 3
     Handler: app.lambdaHandler
-    Runtime: nodejs10.x
+    Runtime: nodejs16.x
     Environment:
       Variables:
         INSTANCE_IDENTIFIER: !Ref InstanceID
@@ -33,7 +33,7 @@ Resources:
         Schedule1:
           Type: Schedule
           Properties:
-            Schedule: cron(0 17 ? * MON-FRI *)
+            Schedule: cron(0 22 ? * MON-FRI *)
       DeadLetterQueue:
         Type: SNS
         TargetArn: !Ref DBFunctionsDeadLetterTopic
@@ -60,5 +60,5 @@ Resources:
     Type: AWS::SNS::Topic
     Properties:
       Subscription:
-        - Endpoint: <YOUR EMAIL ADRES>
+        - Endpoint: lmiranda@brooklynva.com
           Protocol: email
