@@ -7,7 +7,7 @@ Parameters:
     Default: qa1-rds-provisioned
   InstanceARN:
     Type: String
-    Default: arn:aws:rds:eu-west-2:341150754668:cluster:qa1-rds-provisioned
+    Default: arn:aws:rds:eu-west-2:341150754668:db:qa1-rds-provisioned
 Globals:
   Function:
     MemorySize: 128
@@ -52,7 +52,7 @@ Resources:
         Schedule1:
           Type: Schedule
           Properties:
-            Schedule: cron(0 5 ? * MON-FRI *)
+            Schedule: cron(0 7 ? * MON-FRI *)
       DeadLetterQueue:
         Type: SNS
         TargetArn: !Ref DBFunctionsDeadLetterTopic

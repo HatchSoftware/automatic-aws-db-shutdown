@@ -27,9 +27,14 @@ sam package --template-file template.yaml --s3-bucket brooklyn-archive-qa1 --out
 Deploy
 
 ```bash
-sam deploy --template-file outputTemplate.yaml --stack-name auto-db-shutdown-stack --capabilities CAPABILITY_IAM
+sam deploy --template-file outputTemplate.yaml --stack-name qa1-auto-db-shutdown-stack --capabilities CAPABILITY_IAM
 ``` 
 
+Delete stack
+
+```bash
+sam delete --stack-name qa1-auto-db-shutdown-stack
+``` 
 #### Automated
 
 Automated deployment with CodePipeline (setup explained in [this blog post](https://medium.com/hatchsoftware/setting-up-ci-cd-for-lambda-functions-using-aws-codepipeline-880567769dde)).
