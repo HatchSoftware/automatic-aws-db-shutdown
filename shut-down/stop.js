@@ -4,9 +4,9 @@ module.exports = (instanceIdentifier) => {
     return new Promise((resolve, reject) => {
         const rds = new AWS.RDS();
         const params = {
-            DBInstanceIdentifier: instanceIdentifier,
+            DBClusterIdentifier: instanceIdentifier,
         };
-        rds.stopDBInstance(params, (err, data)=> {
+        rds.stopDBCluster(params, (err, data)=> {
             if (err) {
                 reject(err);
             } else {
