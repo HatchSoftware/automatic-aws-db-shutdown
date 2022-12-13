@@ -2,10 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Automatic database shut down and start up Lambda functions
 Parameters:
-  InstanceID:
+  InstanceID: # RDS Cluster ID
     Type: String
-    Default: qa1-rds-provisioned
-  InstanceARN:
+    Default: qa1-rds-provisioned-new
+  InstanceARN: # RDS Cluster ARN
     Type: String
     Default: arn:aws:rds:eu-west-2:341150754668:cluster:qa1-rds-provisioned
 Globals:
