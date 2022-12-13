@@ -2,6 +2,14 @@
 
 This repository was created together with [this blog post](https://medium.com/hatchsoftware/saving-money-by-automatically-shutting-down-rds-instances-using-aws-lambda-and-aws-sam-925fd86592b5).
 
+
+## Serverless clusters and provisioned instances
+
+we have 2 branches
+
+- master works for provisioned instances
+- serverless works for serverless clusters
+
 #### Prerequisites
 - Install Node.js (https://nodejs.org/en/download/)
 - Install AWS CLI (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
